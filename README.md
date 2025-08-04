@@ -1,24 +1,21 @@
-________________________________________
-📦 Tổng Quan Các File Sẽ Tạo:
-File/Folder            Vai trò
-client.key             Private key cho client
-client.csr             Certificate Signing Request của client
-client.crt             client cert đã được ký bởi CA
-client.keystore.p12    Keystore dùng cho client 
-client.truststore.p12  Truststore để client tin CA
-________________________________________
+# mTLS setup guide
 
-✅ BƯỚC 1: Tạo Client key và CSR
+## Generated files
+**client.key**:Private key cho client
+**client.csr**:Certificate Signing Request của client
+**client.crt**:Client cert đã được ký bởi CA
+**client.keystore.p12**:Keystore dùng cho client 
+**client.truststore.p12**:Truststore để client tin CA
+
+## Step 1: Create Client key and CSR
+```bash
 openssl genrsa -out client.key 2048
 openssl req -new -key client.key -out client.csr -subj "/CN=Client"
+```
 
-________________________________________
+## Step 2: The partner's CA signs the client's CSR and returns the client.crt file.
 
-✅ BƯỚC 2: CA của napas ký CSR của Client và trả về file client.crt
-
-________________________________________
-
-✅ BƯỚC 3: Tạo keystore và truststore
+## Step 3: Create keystore and truststore
 
 1. Client keystore 
 openssl pkcs12 -export \
