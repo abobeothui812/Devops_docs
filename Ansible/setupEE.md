@@ -78,3 +78,11 @@ Run the playbook inside the postgresql_ee EE.
 ```bash
 ansible-navigator run test_localhost.yml --execution-environment-image postgresql_ee --mode stdout --pull-policy missing --container-options='--user=0'
 ```
+
+# Step 4 : Running your EE in remote
+
+Change hosts: localhost -> myhosts
+
+```bash
+ansible-navigator run test_remote.yml -i inventory --execution-environment-image postgresql_ee:latest --mode stdout --pull-policy missing --enable-prompts -u student -k -K
+```
