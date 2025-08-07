@@ -60,3 +60,21 @@ If you use docker, add the --container-runtime docker argument.
 ansible-builder build --tag postgresql_ee
 ```
 
+# Step 3 : Running your EE
+Create a test_localhost.yml playbook.
+```ini
+- name: Gather and print local facts
+  hosts: localhost
+  become: true
+  gather_facts: true
+  tasks:
+
+   - name: Print facts
+     ansible.builtin.debug:
+      var: ansible_facts
+```
+
+Run the playbook inside the postgresql_ee EE.
+```bash
+ansible-navigator run test_localhost.yml --execution-environment-image postgresql_ee --mode stdout --pull-policy missing --container-options='--user=0'
+```
